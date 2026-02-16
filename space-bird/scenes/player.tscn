@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://v326giwrllbo"]
+
+[ext_resource type="Script" uid="uid://di001rhaqimig" path="res://scenes/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dliyi77mec85r" path="res://sprites/shipSheet.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://ci36bvdlby4r5" path="res://sprites/ship_toppers/defaultTopper.png" id="3_tuyoq"]
+[ext_resource type="Script" uid="uid://bx5pjqt7ehbfs" path="res://scenes/topper.gd" id="4_fjrip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 0, 252, 272)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(252, 0, 252, 272)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(504, 0, 252, 272)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(756, 0, 252, 272)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jej6c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tuyoq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 40.0
+height = 206.0
+
+[node name="Player" type="Node2D" unique_id=1721175607]
+position = Vector2(-120, 0)
+script = ExtResource("1_dqkch")
+
+[node name="ship" type="AnimatedSprite2D" parent="." unique_id=46796421]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_3v2ag")
+frame_progress = 0.7885122
+offset = Vector2(1, 0.99999994)
+
+[node name="topper" type="AnimatedSprite2D" parent="ship" unique_id=25227587]
+sprite_frames = SubResource("SpriteFrames_jej6c")
+offset = Vector2(0.99999547, -103)
+script = ExtResource("4_fjrip")
+
+[node name="hitbox" type="Area2D" parent="." unique_id=194677210]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1747588147]
+position = Vector2(1, -4.371139e-08)
+shape = SubResource("CapsuleShape2D_dqkch")
