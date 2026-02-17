@@ -83,7 +83,7 @@ func break_apart():
 
 func hit_player():
 	GameManager.add_score(1)
-	GameManager.speed += 5.0
+	GameManager.speed += 10.0
 	AudioManager.play_sound(preload("res://sounds/powerup3.wav"), 0.6)
 	queue_free()
 	

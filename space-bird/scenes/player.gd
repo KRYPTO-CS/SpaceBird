@@ -23,6 +23,7 @@ var last_finger_pos := Vector2.ZERO
 # physics
 var acceleration_y := 5.0
 var velocity_y := 0.0
+var max_velocity = 12.0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,22 +57,21 @@ func _process(delta: float) -> void:
 	if finger_active:
 		if  self.rotation > -0.6 and starttoggle:
 			self.rotation -= 0.01
-		print(finger_active)
 		velocity_y -= 0.1*acceleration_y
-		velocity_y = max(velocity_y, -12)
+		velocity_y = max(velocity_y, -max_velocity)
 	else:
 		if  self.rotation < 0.6 and starttoggle:
 			self.rotation += 0.01
 
 		velocity_y -= 0.1*acceleration_y
-		velocity_y = min(velocity_y, 12)
-
+		velocity_y = min(velocity_y, max_velocity)
+		
 	if starttoggle:
 		if self.position.y == y_limit:
-			velocity_y = -1.0
+			velocity_y = -0.01
 			self.rotation = 0.0
 		if self.position.y == -y_limit:
-			velocity_y = 1.0
+			velocity_y = 0.01
 			self.rotation = 0.0
 		self.position += Vector2(0, velocity_y)
 	else:
