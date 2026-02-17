@@ -62,7 +62,6 @@ radius = 40.0
 height = 206.0
 
 [node name="Player" type="Node2D" unique_id=1721175607]
-position = Vector2(-120, 0)
 script = ExtResource("1_dqkch")
 
 [node name="ship" type="AnimatedSprite2D" parent="." unique_id=46796421]
@@ -76,7 +75,7 @@ sprite_frames = SubResource("SpriteFrames_jej6c")
 offset = Vector2(0.99999547, -103)
 script = ExtResource("4_fjrip")
 
-[node name="hitbox" type="Area2D" parent="." unique_id=194677210]
+[node name="hitbox" type="Area2D" parent="." unique_id=194677210 groups=["player"]]
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1747588147]

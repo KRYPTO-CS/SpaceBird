@@ -7,7 +7,7 @@ var speed: float = 100
 var swiftCounter: float = 1.0
 
 const SPEED_ACCELERATION := 2.0
-const MIN_SPEED := 50.0
+const MIN_SPEED := -1000.0
 const MAX_SPEED := 1000.0
 const SWIFT_DECAY := 0.3
 const MIN_SWIFT := 1.0
@@ -26,11 +26,13 @@ func _ready():
 	JavaScriptBridge.eval("testMessage();")
 
 func _process(delta: float) -> void:
-	if not game_started:
-		return
+	## fic this later
+	"""if not game_started:
+		return"""
 	
 	speed = clamp(speed + SPEED_ACCELERATION * delta, MIN_SPEED, MAX_SPEED)
 	swiftCounter = clamp(swiftCounter - SWIFT_DECAY * delta, MIN_SWIFT, MAX_SWIFT)
+	print("test")
 	
 func begin_game() -> void:
 	if game_scene:
