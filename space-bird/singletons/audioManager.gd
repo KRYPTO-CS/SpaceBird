@@ -1,7 +1,5 @@
 extends Node
 
-@onready var default_player = $AudioStreamPlayer
-
 func play_sound(stream: AudioStream, volume: float = 1.0, volume_mult: float = 1.0) -> void:
 	var sfx = AudioStreamPlayer2D.new()
 	sfx.stream = stream

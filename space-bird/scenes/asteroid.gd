@@ -96,8 +96,6 @@ func flash_red():
 	
 func explode():
 	var explosion = preload("res://scenes/explosion.tscn").instantiate()
-	explosion.prefix = prefix
-	explosion.active_status = active_status
 	explosion.global_position = global_position
 	get_parent().add_child(explosion)
 	queue_free()

@@ -26,13 +26,12 @@ func _ready():
 	JavaScriptBridge.eval("testMessage();")
 
 func _process(delta: float) -> void:
-	## fic this later
+	## fix this later
 	"""if not game_started:
 		return"""
 	
 	speed = clamp(speed + SPEED_ACCELERATION * delta, MIN_SPEED, MAX_SPEED)
 	swiftCounter = clamp(swiftCounter - SWIFT_DECAY * delta, MIN_SWIFT, MAX_SWIFT)
-	print("test")
 	
 func begin_game() -> void:
 	if game_scene:

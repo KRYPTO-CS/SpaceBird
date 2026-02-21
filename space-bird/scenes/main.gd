@@ -24,7 +24,7 @@ func _process(delta):
 		
 func spawn_asteroid():
 	var asteroid = asteroid_scene.instantiate()
-	asteroid.position = Vector2(540, randf_range(-880, 880))
+	asteroid.position = Vector2(650, randf_range(-880, 880))
 	asteroid.speed = GameManager.speed * 0.75 + 150
 	
 	add_child(asteroid)

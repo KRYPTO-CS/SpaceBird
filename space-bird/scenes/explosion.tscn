@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drjh4twaar1jv" path="res://scenes/explosion.gd" id="1_17npe"]
 [ext_resource type="Texture2D" uid="uid://rv8vp367orti" path="res://sprites/debris.png" id="1_nfeox"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aw4cw"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+[ext_resource type="Material" uid="uid://di3n0ckb2onla" path="res://ExplosionParticles.tres" id="2_aw4cw"]
 
 [node name="Explosion" type="GPUParticles2D" unique_id=1043218511]
 emitting = false
@@ -14,5 +11,5 @@ texture = ExtResource("1_nfeox")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_aw4cw")
+process_material = ExtResource("2_aw4cw")
 script = ExtResource("1_17npe")

@@ -14,7 +14,7 @@ func _ready() -> void:
 	var window = JavaScriptBridge.get_interface("window")
 	window.cb = _callback_ref
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_js_message(args):

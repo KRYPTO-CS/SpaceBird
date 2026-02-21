@@ -21,11 +21,12 @@ var active_finger_index := -1
 var last_finger_pos := Vector2.ZERO
 
 # physics
-var acceleration_y := 5.0
+var acceleration_y := 8.0
 var velocity_y := 0.0
-var acceleration_strength := 1500.0
-var max_velocity := 1000.0
+var acceleration_strength := 2500.0
+var max_velocity := 1250.0
 var rotation_speed := 2.0
+var max_tilt = deg_to_rad(45)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,12 +41,10 @@ func _input(event):
 			finger_active = true
 			last_finger_pos = event.position
 			starttoggle = true
-			print("touch")
 		elif not event.pressed and event.index == active_finger_index:
 			finger_active = false
 			acceleration_y = -1
 			active_finger_index = -1
-			print("let go")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,27 +55,23 @@ func _process(delta: float) -> void:
 	# this block determines player speed.
 	# acceleration stays constant (we can change with game state variables)
 	if finger_active:
-		if  self.rotation > -0.6 and starttoggle:
-			self.rotation -= rotation_speed*delta
 		velocity_y -= acceleration_strength*acceleration_y*delta
 		velocity_y = max(velocity_y, -max_velocity)
 	else:
-		if  self.rotation < 0.6 and starttoggle:
-			self.rotation += rotation_speed*delta
-
 		velocity_y -= acceleration_strength*acceleration_y*delta
 		velocity_y = min(velocity_y, max_velocity)
 		
 	if starttoggle:
 		if self.position.y == y_limit:
 			velocity_y = -0.01
-			self.rotation = 0.0
 		if self.position.y == -y_limit:
 			velocity_y = 0.01
-			self.rotation = 0.0
 		self.position += Vector2(0, velocity_y*delta)
 	else:
 		self.velocity_y = 5.0
+	# Rotation based on vertical speed
+	var target_rotation = clamp(velocity_y / max_velocity, -1.0, 1.0) * max_tilt
+	rotation = lerp(rotation, target_rotation, 8.0 * delta)
 		
 	if state == PlayerState.INVINCIBLE:
 		flash_timer += delta
