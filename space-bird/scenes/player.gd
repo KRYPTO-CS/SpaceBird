@@ -23,8 +23,9 @@ var last_finger_pos := Vector2.ZERO
 # physics
 var acceleration_y := 5.0
 var velocity_y := 0.0
-var max_velocity = 12.0
-
+var acceleration_strength := 1500.0
+var max_velocity := 1000.0
+var rotation_speed := 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,14 +57,14 @@ func _process(delta: float) -> void:
 	# acceleration stays constant (we can change with game state variables)
 	if finger_active:
 		if  self.rotation > -0.6 and starttoggle:
-			self.rotation -= 0.01
-		velocity_y -= 0.1*acceleration_y
+			self.rotation -= rotation_speed*delta
+		velocity_y -= acceleration_strength*acceleration_y*delta
 		velocity_y = max(velocity_y, -max_velocity)
 	else:
 		if  self.rotation < 0.6 and starttoggle:
-			self.rotation += 0.01
+			self.rotation += rotation_speed*delta
 
-		velocity_y -= 0.1*acceleration_y
+		velocity_y -= acceleration_strength*acceleration_y*delta
 		velocity_y = min(velocity_y, max_velocity)
 		
 	if starttoggle:
@@ -73,7 +74,7 @@ func _process(delta: float) -> void:
 		if self.position.y == -y_limit:
 			velocity_y = 0.01
 			self.rotation = 0.0
-		self.position += Vector2(0, velocity_y)
+		self.position += Vector2(0, velocity_y*delta)
 	else:
 		self.velocity_y = 5.0
 		
@@ -85,7 +86,7 @@ func _process(delta: float) -> void:
 
 func take_damage(time):
 	state = PlayerState.INVINCIBLE
-	velocity_y = 10.0
+	velocity_y = -velocity_y * 0.75
 	invincibility_timer(time)
 	self.modulate = Color(1, 0, 0)
 	await get_tree().create_timer(0.1).timeout
